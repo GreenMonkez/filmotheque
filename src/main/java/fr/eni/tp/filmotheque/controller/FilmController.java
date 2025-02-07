@@ -32,6 +32,7 @@ public class FilmController {
 	@GetMapping("/films/detail")
 	public String afficherUnFilm(@RequestParam("id") long id, Model model) {
 		Film film = this.filmService.consulterFilmParId(id);
+		System.out.println(film);
 		model.addAttribute("film", film);
 
 		return "view-film-detail";

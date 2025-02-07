@@ -57,6 +57,7 @@ public class FilmController {
 	@PostMapping("/films/creer")
 	public String creerFilm(@Valid @ModelAttribute("film") Film film, BindingResult bindingResult) {
 		System.out.println("film = " + film);
+		System.out.println(film);
 
 		if (bindingResult.hasErrors()) {
 			return "view-film-creation";

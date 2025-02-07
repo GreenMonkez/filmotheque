@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Demo Spring Boot Web</title>
+	<link rel="icon" th:href="@{/images/logoENI.png}" />
+	<link rel="stylesheet" th:href="@{/css/general.css}" />
+	<link rel="stylesheet" th:href="@{/css/tp-form.css}" />
+	<link rel="stylesheet" th:href="@{/css/tp-error.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+	
+		<!-- Etape 2 : récupérer l'attribut du model "formateur dans le th:object"
+		et ajout de l'attribut th:field sur chaque champ.
+		le th:field génère les attributs HTML name + value -->
+		<form th:action="@{/signin}" method="POST" th:object="${membre}">
+			<h1>Inscription</h1>
+			<div class="cards" th:if="${#fields.hasErrors('*')}">
+		 		<h2>Attention : Veuillez vérifier vos champs</h2>
+			</div>
+			<ul th:if="${#fields.hasErrors('global')}">
+  				<li th:each="err : ${#fields.errors('global')}" th:text="#{${err}}">
+  					Input is incorrect
+  				</li>
+			</ul>
+			
+			<ul class="flex-outer">
+				<li>
+					<label for="idNom">Nom</label>
+					<input id="idNom" type="text" th:field="*{nom}"/>
+					<p class="cards" th:errors="*{nom}"></p>
+				</li>
+				<li>
+					<label for="idPrenom">Prenom</label>
+					<input id="idPrenom" type="text" th:field="*{prenom}"/>
+					<p class="cards" th:errors="*{prenom}"></p>
+				</li>
+				<li>
+					<label for="idEmail">Email</label>
+					<input id="idEmail" type="text" th:field="*{pseudo}"/>
+					<p class="cards" th:errors="*{pseudo}"></p>
+				</li>
+				<li>
+					<label for="idPassword">Password</label>
+					<input id="idPassword" type="password" th:field="*{motDePasse}"/>
+					<p class="cards" th:errors="*{motDePasse}"></p>
+				</li>
+				
+				<li>
+					<button type="submit">Enregistrer</button>
+				</li>
+			</ul>
+		</form>
+	
+	<div th:replace="~{fragments/fragment-footer :: footer}"></div>
+
+</body>
+</html>
